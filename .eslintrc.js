@@ -18,4 +18,5 @@ module.exports = {
     "import/newline-after-import": ["error", { "count": 1 }],
     "comma-dangle": 0
   },
+  "env": { "node": true,  "mocha": true }
 }; 
