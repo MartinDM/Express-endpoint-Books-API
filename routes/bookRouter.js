@@ -15,11 +15,9 @@ function routes(Book){
      bookRouter.use('/books/:bookId', (req, res, next) => {
         Book.findById( req.params.bookId, (err, book) => {
             if (err) {
-                console.log('error!');
                 return res.send(err)
             }
             if(book){
-                console.log('its ok!');
                 // Add book to the object on request
                 req.book = book;
                 return next();
