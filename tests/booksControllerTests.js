@@ -7,7 +7,7 @@ describe('Book controller test', () => {
   describe('Post', () => {
     it('should not allow an empty title when creating a book on POST', () => {
       // Creating a mock Book object
-      // Dpoesn't require a 'shape' or 'type', just a function.
+      // Doesn't require a 'shape' or 'type', just a function.
       const Book = function(book){
         this.save = () => {}
       };

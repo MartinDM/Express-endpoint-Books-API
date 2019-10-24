@@ -19,7 +19,7 @@ describe(`Book 'CRUD' test`, () => {
       .end( (error, results) => {
         results.body.read.should.not.equal(true)
         results.body.should.have.property('_id');
-        // Completes the  for Supertest and Mocha
+        // Completes the test for Supertest and Mocha
         done();
       })
   })
