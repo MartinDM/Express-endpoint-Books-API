@@ -1,9 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const stripe = require('stripe')(process.env.SK);
-
 require('dotenv').config();
+const stripe = require('stripe')(process.env.SK);
+// Secret Key from Stripe dashboard
+
 const app = express();
 if ( process.env.ENV == 'Test') {
   console.log('Dev');
@@ -14,18 +15,6 @@ if ( process.env.ENV == 'Test') {
 }
 
 const port = process.env.PORT || 3000;
-
-app.post('/intents', async (req, res) => {
-  console.log(req.body)
-  const { amount, currency } = req.body;
-
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount,
-    currency,
-    payment_method_types: ['card']
-  });
-  res.send(paymentIntent);
-});
 
 // Books API
 const Book = require('./models/bookModel');
@@ -39,6 +28,17 @@ app.use('/api', bookRouter);
 app.server = app.listen(port, () => {
   // Returns the server which is listening
     console.log(`Running on ${port}`);
+});
+
+app.post('/intents', async (req, res) => {
+  console.log(req.body);
+  const { amount, currency } = req.body; 
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount,
+    currency,
+    payment_method_types: ['card']
+  });
+  res.json(paymentIntent);
 });
 
 module.exports = app;
