@@ -7,6 +7,7 @@ function routes(Book){
     const controller = booksController(Book);
     
     // Separated out for unit testing
+    // Tell express Router how to handle GET and POSTs from the controller above
     bookRouter.route('/books')
       .post(controller.post)
       .get(controller.get);

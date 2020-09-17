@@ -25,6 +25,7 @@ function booksController(Book) {
         const returnedBooks = books.map( (book) => {
           const newBook = book.toJSON();
           newBook.links = {};
+          // Provide a link to the id of the book result
           newBook.links.self = `http://${req.headers.host}/api/books/${book._id}`;
           return newBook;
         });
