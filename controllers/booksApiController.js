@@ -1,8 +1,19 @@
-function booksController(Book) {
-
+function booksApiController(Book) {
+ 
+  // Revealing module pattern
+  function post(req, res) {
+    const book = new Book(req.body);
+    if (!req.body.title){
+      res.status(400)
+      return res.send('Title is required')
+    }
+    book.save();
+    // 'Created' status
+    res.status(201);
+    return res.json(book);
+  }
 
   function get(req, res) {
-    console.log('list all books here')
     const query = {};
     if( req.query.genre ) {
         query.genre = req.query.genre;
@@ -22,7 +33,7 @@ function booksController(Book) {
     });
   };
   // Expose these functions to the app
-  return { get };
+  return { post, get };
 }
 
-module.exports = booksController;
+module.exports = booksApiController;
